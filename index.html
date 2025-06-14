@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Salon & Spa - Professional Hair & Beauty Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        .staff-card {
+            transition: all 0.3s ease;
+        }
+        .staff-card:hover {
+            transform: scale(1.05);
+        }
+        .booking-form {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .booking-form.active {
+            max-height: 600px;
+        }
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.1);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .review-slider {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-purple-600 font-playfair">Elite Salon & Spa</h1>
+                    </div>
+                    <div class="hidden md:ml-10 md:flex md:space-x-8">
+                        <a href="#home" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium transition">Home</a>
+                        <a href="#services" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium transition">Services</a>
+                        <a href="#staff" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium transition">Staff</a>
+                        <a href="#gallery" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium transition">Gallery</a>
+                        <a href="#reviews" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium transition">Reviews</a>
+                        <a href="#contact" class="text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium transition">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button onclick="toggleBookingForm()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                        <i class="fas fa-calendar-alt mr-2"></i>Book Now
+                    </button>
+                    <button class="md:hidden ml-4" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-gray-900 hover:text-purple-600">Home</a>
+                <a href="#services" class="block px-3 py-2 text-gray-900 hover:text-purple-600">Services</a>
+                <a href="#staff" class="block px-3 py-2 text-gray-900 hover:text-purple-600">Staff</a>
+                <a href="#gallery" class="block px-3 py-2 text-gray-900 hover:text-purple-600">Gallery</a>
+                <a href="#reviews" class="block px-3 py-2 text-gray-900 hover:text-purple-600">Reviews</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-900 hover:text-purple-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-16 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-7xl font-bold font-playfair mb-6 animate-fade-in">
+                    Beauty & Style<br>
+                    <span class="text-yellow-300">Redefined</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in">
+                    Experience luxury hair and beauty services for both men and women at Elite Salon & Spa
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
+                    <button onclick="scrollToSection('services')" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        Explore Services
+                    </button>
+                    <button onclick="toggleBookingForm()" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition">
+                        Book Appointment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Book Appointment</h2>
+                <button onclick="toggleBookingForm()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="booking-form" onsubmit="handleBooking(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <input type="text" name="name" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
+                    <input type="tel" name="phone" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" name="email" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Service Category</label>
+                    <select name="category" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" onchange="updateServices(this.value)">
+                        <option value="">Select Category</option>
+                        <option value="women">Women's Services</option>
+                        <option value="men">Men's Services</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Service</label>
+                    <select name="service" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" id="service-select">
+                        <option value="">Select Service</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Preferred Date</label>
+                    <input type="date" name="date" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Preferred Time</label>
+                    <select name="time" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                        <option value="">Select Time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                    </select>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Special Requests</label>
+                    <textarea name="notes" rows="3" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Any special requirements or preferences..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                    <i class="fas fa-calendar-check mr-2"></i>Book Appointment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 font-playfair mb-4">Our Services</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Professional beauty and grooming services tailored for both men and women</p>
+            </div>
+
+            <!-- Service Category Tabs -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-gray-100 rounded-lg p-1">
+                    <button onclick="switchServiceTab('women')" id="women-tab" class="service-tab active px-6 py-3 rounded-lg font-semibold transition">
+                        Women's Services
+                    </button>
+                    <button onclick="switchServiceTab('men')" id="men-tab" class="service-tab px-6 py-3 rounded-lg font-semibold transition">
+                        Men's Services
+                    </button>
+                </div>
+            </div>
+
+            <!-- Women's Services -->
+            <div id="women-services" class="service-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-cut text-4xl text-purple-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Hair Styling & Cuts</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Professional Haircuts</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Blow Dry & Styling</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Bridal Hair</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Hair Extensions</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-purple-600">$45-$120</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-palette text-4xl text-purple-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Hair Coloring</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Full Color</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Highlights & Lowlights</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Balayage</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Color Correction</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-purple-600">$85-$250</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-spa text-4xl text-purple-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Facial Treatments</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Deep Cleansing Facial</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Anti-Aging Treatment</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Hydrating Facial</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Acne Treatment</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-purple-600">$65-$150</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-hand-sparkles text-4xl text-purple-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Nail Services</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Manicure & Pedicure</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Gel Polish</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Nail Art</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>French Manicure</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-purple-600">$35-$80</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-eye text-4xl text-purple-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Eyebrow & Lashes</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Eyebrow Shaping</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Eyebrow Tinting</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Lash Extensions</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Lash Lift & Tint</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-purple-600">$25-$120</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-fire text-4xl text-purple-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Hair Treatments</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Keratin Treatment</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Deep Conditioning</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Scalp Treatment</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Hair Repair</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-purple-600">$75-$200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Men's Services -->
+            <div id="men-services" class="service-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-cut text-4xl text-blue-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Haircuts & Styling</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Classic Cuts</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Modern Styles</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Beard Trimming</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Hair Washing</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-blue-600">$25-$65</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-razor text-4xl text-blue-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Shaving Services</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Traditional Hot Towel Shave</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Beard Shaping</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Mustache Trim</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Aftershave Treatment</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-blue-600">$30-$55</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-tint text-4xl text-blue-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Hair Coloring</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Gray Coverage</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Highlights</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Beard Coloring</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Natural Color Enhancement</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-blue-600">$45-$95</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-spa text-4xl text-blue-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Skincare</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Men's Facial</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Deep Cleansing</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Anti-Aging Treatment</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Moisturizing</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-blue-600">$55-$120</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-magic text-4xl text-blue-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Hair Treatments</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Scalp Treatment</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Hair Loss Treatment</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Deep Conditioning</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Dandruff Treatment</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-blue-600">$65-$150</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card bg-white rounded-lg shadow-lg p-6 border">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-gift text-4xl text-blue-600 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Packages</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Groom's Package</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Executive Package</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Father & Son</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Monthly Membership</li>
+                        </ul>
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-blue-600">$85-$300</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section id="staff" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 font-playfair mb-4">Meet Our Expert Team</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Our talented stylists and beauty professionals are dedicated to making you look and feel your best</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="staff-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-64 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-user text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Sarah Johnson</h3>
+                        <p class="text-purple-600 font-semibold mb-2">Senior Hair Stylist</p>
+                        <p class="text-gray-600 text-sm mb-4">15+ years experience in hair cutting, coloring, and styling. Specializes in modern trends and bridal hair.</p>
+                        <div class="flex space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-user text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Michael Chen</h3>
+                        <p class="text-blue-600 font-semibold mb-2">Master Barber</p>
+                        <p class="text-gray-600 text-sm mb-4">Expert in traditional and modern men's cuts. Known for precision beard trimming and hot towel shaves.</p>
+                        <div class="flex space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-64 bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center">
+                        <i class="fas fa-user text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Emma Rodriguez</h3>
+                        <p class="text-pink-600 font-semibold mb-2">Esthetician</p>
+                        <p class="text-gray-600 text-sm mb-4">Certified skincare specialist with expertise in anti-aging treatments and acne solutions.</p>
+                        <div class="flex space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="staff-card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <i class="fas fa-user text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">David Kim</h3>
+                        <p class="text-green-600 font-semibold mb-2">Color Specialist</p>
+                        <p class="text-gray-600 text-sm mb-4">Creative colorist specializing in balayage, highlights, and creative color transformations.</p>
+                        <div class="flex space-x-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 font-playfair mb-4">Our Work Gallery</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">See the stunning transformations and beautiful work our team creates every day</p>
+            </div>
+
+            <!-- Gallery Filter -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-gray-100 rounded-lg p-1">
+                    <button onclick="filterGallery('all')" class="gallery-filter active px-4 py-2 rounded-lg font-semibold transition">All</button>
+                    <button onclick="filterGallery('haircuts')" class="gallery-filter px-4 py-2 rounded-lg font-semibold transition">Haircuts</button>
+                    <button onclick="filterGallery('color')" class="gallery-filter px-4 py-2 rounded-lg font-semibold transition">Color</button>
+                    <button onclick="filterGallery('styling')" class="gallery-filter px-4 py-2 rounded-lg font-semibold transition">Styling</button>
+                    <button onclick="filterGallery('men')" class="gallery-filter px-4 py-2 rounded-lg font-semibold transition">Men's</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
+                <div class="gallery-item haircuts" data-category="haircuts">
+                    <div class="bg-gradient-to-br from-purple-300 to-purple-500 h-48 rounded-lg flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-cut text-4xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item color" data-category="color">
+                    <div class="bg-gradient-to-br from-pink-300 to-pink-500 h-48 rounded-lg flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-palette text-4xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item styling" data-category="styling">
+                    <div class="bg-gradient-to-br from-blue-300 to-blue-500 h-48 rounded-lg flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-magic text-4xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item men" data-category="men">
+                    <div class="bg-gradient-to-br from-green-300 to-green-500 h-48 rounded-lg flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-male text-4xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item color" data-category="color">
+                    <div class="bg-gradient-to-br from-yellow-300 to-yellow-500 h-48 rounded-lg flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-tint text-4xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item haircuts" data-category="haircuts">
+                    <div class="bg-gradient-to-br from-red-300 to-red-500 h-48 rounded-lg flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-scissors text-4xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item men" data-category="men">
+                    <div class="bg-gradient-to-br from-indigo-300 to-indigo-500 h-48 rounded-lg flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-razor text-4xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item styling" data-category="styling">
+                    <div class="bg-gradient-to-br from-teal-300 to-teal-500 h-48 rounded-lg flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-star text-4xl text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 font-playfair mb-4">What Our Clients Say</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Don't just take our word for it - hear from our satisfied customers</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 mr-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Absolutely amazing experience! Sarah gave me the best haircut I've ever had. The salon is beautiful and the staff is so professional."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Jessica Martinez</h4>
+                            <p class="text-sm text-gray-500">Regular Customer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 mr-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Michael is a master barber! Best shave and haircut I've gotten in years. The attention to detail is incredible."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Robert Johnson</h4>
+                            <p class="text-sm text-gray-500">Business Executive</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 mr-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Emma's facial treatments are life-changing! My skin has never looked better. Highly recommend Elite Salon!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Amanda Davis</h4>
+                            <p class="text-sm text-gray-500">Marketing Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 mr-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"David's color work is absolutely stunning! He transformed my hair into exactly what I envisioned. True artist!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Lisa Thompson</h4>
+                            <p class="text-sm text-gray-500">Teacher</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 mr-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"The whole team at Elite Salon is fantastic. Clean, professional, and they really listen to what you want."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Mark Wilson</h4>
+                            <p class="text-sm text-gray-500">Software Developer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 mr-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Perfect for my wedding day! The team made me feel beautiful and confident. Thank you for making my special day even more perfect!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Rachel Green</h4>
+                            <p class="text-sm text-gray-500">Bride</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Review Form -->
+            <div class="mt-16 bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Leave a Review</h3>
+                <form onsubmit="handleReviewSubmit(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                            <input type="text" name="reviewName" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Rating</label>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star star-rating cursor-pointer text-gray-300 text-xl" data-rating="1"></i>
+                                <i class="fas fa-star star-rating cursor-pointer text-gray-300 text-xl" data-rating="2"></i>
+                                <i class="fas fa-star star-rating cursor-pointer text-gray-300 text-xl" data-rating="3"></i>
+                                <i class="fas fa-star star-rating cursor-pointer text-gray-300 text-xl" data-rating="4"></i>
+                                <i class="fas fa-star star-rating cursor-pointer text-gray-300 text-xl" data-rating="5"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Your Review</label>
+                        <textarea name="reviewText" rows="4" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="Tell us about your experience..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                        <i class="fas fa-paper-plane mr-2"></i>Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 font-playfair mb-4">Contact Us</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Get in touch with us to book an appointment or ask any questions</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div>
+                    <div class="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-6">Get In Touch</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Address</h4>
+                                    <p>123 Beauty Street, Salon City, SC 12345</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Phone</h4>
+                                    <p>(555) 123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p>info@elitesalon.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Hours</h4>
+                                    <p>Mon-Fri: 9AM-7PM<br>Sat: 9AM-6PM<br>Sun: 10AM-5PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h4 class="font-semibold mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-white bg-opacity-20 p-3 rounded-full hover:bg-opacity-30 transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="bg-white bg-opacity-20 p-3 rounded-full hover:bg-opacity-30 transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="bg-white bg-opacity-20 p-3 rounded-full hover:bg-opacity-30 transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="bg-white bg-opacity-20 p-3 rounded-full hover:bg-opacity-30 transition">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div>
+                    <form onsubmit="handleContactSubmit(event)" class="bg-gray-50 rounded-lg p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
+                                <input type="text" name="firstName" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
+                                <input type="text" name="lastName" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                                <input type="email" name="contactEmail" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
+                                <input type="tel" name="contactPhone" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Subject</label>
+                            <select name="subject" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500">
+                                <option value="">Select Subject</option>
+                                <option value="appointment">Appointment Inquiry</option>
+                                <option value="services">Services Information</option>
+                                <option value="complaint">Complaint</option>
+                                <option value="compliment">Compliment</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                            <textarea name="message" rows="5" required class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-purple-500" placeholder="How can we help you?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold font-playfair mb-4">Elite Salon & Spa</h3>
+                    <p class="text-gray-300 mb-4">Your premier destination for luxury hair and beauty services. We're committed to making you look and feel your absolute best.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition">Hair Cuts & Styling</a></li>
+                        <li><a href="#" class="hover:text-white transition">Hair Coloring</a></li>
+                        <li><a href="#" class="hover:text-white transition">Facial Treatments</a></li>
+                        <li><a href="#" class="hover:text-white transition">Men's Grooming</a></li>
+                        <li><a href="#" class="hover:text-white transition">Nail Services</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#home" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="#staff" class="hover:text-white transition">Our Team</a></li>
+                        <li><a href="#gallery" class="hover:text-white transition">Gallery</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>123 Beauty Street, Salon City</li>
+                        <li><i class="fas fa-phone mr-2"></i>(555) 123-4567</li>
+                        <li><i class="fas fa-envelope mr-2"></i>info@elitesalon.com</li>
+                        <li><i class="fas fa-clock mr-2"></i>Mon-Sun: 9AM-7PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2024 Elite Salon & Spa. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JSON Data Storage
+        const salonData = {
+            services: {
+                women: [
+                    { name: "Hair Styling & Cuts", price: "$45-$120", icon: "fas fa-cut" },
+                    { name: "Hair Coloring", price: "$85-$250", icon: "fas fa-palette" },
+                    { name: "Facial Treatments", price: "$65-$150", icon: "fas fa-spa" },
+                    { name: "Nail Services", price: "$35-$80", icon: "fas fa-hand-sparkles" },
+                    { name: "Eyebrow & Lashes", price: "$25-$120", icon: "fas fa-eye" },
+                    { name: "Hair Treatments", price: "$75-$200", icon: "fas fa-fire" }
+                ],
+                men: [
+                    { name: "Haircuts & Styling", price: "$25-$65", icon: "fas fa-cut" },
+                    { name: "Shaving Services", price: "$30-$55", icon: "fas fa-razor" },
+                    { name: "Hair Coloring", price: "$45-$95", icon: "fas fa-tint" },
+                    { name: "Skincare", price: "$55-$120", icon: "fas fa-spa" },
+                    { name: "Hair Treatments", price: "$65-$150", icon: "fas fa-magic" },
+                    { name: "Packages", price: "$85-$300", icon: "fas fa-gift" }
+                ]
+            },
+            appointments: [],
+            reviews: [],
+            staff: [
+                { name: "Sarah Johnson", role: "Senior Hair Stylist", experience: "15+ years", specialties: ["Hair Cutting", "Coloring", "Bridal Hair"] },
+                { name: "Michael Chen", role: "Master Barber", experience: "12+ years", specialties: ["Men's Cuts", "Beard Trimming", "Hot Shaves"] },
+                { name: "Emma Rodriguez", role: "Esthetician", experience: "10+ years", specialties: ["Skincare", "Anti-Aging", "Acne Treatment"] },
+                { name: "David Kim", role: "Color Specialist", experience: "8+ years", specialties: ["Balayage", "Creative Color", "Highlights"] }
+            ]
+        };
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Smooth Scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Service Tab Switching
+        function switchServiceTab(category) {
+            const womenTab = document.getElementById('women-tab');
+            const menTab = document.getElementById('men-tab');
+            const womenServices = document.getElementById('women-services');
+            const menServices = document.getElementById('men-services');
+
+            if (category === 'women') {
+                womenTab.classList.add('active', 'bg-purple-600', 'text-white');
+                womenTab.classList.remove('text-gray-600');
+                menTab.classList.remove('active', 'bg-purple-600', 'text-white');
+                menTab.classList.add('text-gray-600');
+                womenServices.classList.remove('hidden');
+                menServices.classList.add('hidden');
+            } else {
+                menTab.classList.add('active', 'bg-blue-600', 'text-white');
+                menTab.classList.remove('text-gray-600');
+                womenTab.classList.remove('active', 'bg-purple-600', 'text-white');
+                womenTab.classList.add('text-gray-600');
+                menServices.classList.remove('hidden');
+                womenServices.classList.add('hidden');
+            }
+        }
+
+        // Booking Form Toggle
+        function toggleBookingForm() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.toggle('active');
+        }
+
+        // Update Services based on category
+        function updateServices(category) {
+            const serviceSelect = document.getElementById('service-select');
+            serviceSelect.innerHTML = '<option value="">Select Service</option>';
+            
+            if (category && salonData.services[category]) {
+                salonData.services[category].forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service.name;
+                    option.textContent = `${service.name} (${service.price})`;
+                    serviceSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Handle Booking Form Submission
+        function handleBooking(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const bookingData = Object.fromEntries(formData.entries());
+            
+            // Simulate PHP backend processing
+            bookingData.id = Date.now();
+            bookingData.status = 'pending';
+            bookingData.created_at = new Date().toISOString();
+            
+            salonData.appointments.push(bookingData);
+            
+            alert('Booking request submitted successfully! We will contact you soon to confirm your appointment.');
+            toggleBookingForm();
+            event.target.reset();
+        }
+
+        // Gallery Filter
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const filters = document.querySelectorAll('.gallery-filter');
+            
+            // Update active filter
+            filters.forEach(filter => {
+                filter.classList.remove('active', 'bg-purple-600', 'text-white');
+                filter.classList.add('text-gray-600');
+            });
+            event.target.classList.add('active', 'bg-purple-600', 'text-white');
+            event.target.classList.remove('text-gray-600');
+            
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Star Rating Functionality
+        let selectedRating = 0;
+        document.querySelectorAll('.star-rating').forEach(star => {
+            star.addEventListener('click', function() {
+                selectedRating = parseInt(this.getAttribute('data-rating'));
+                updateStarRating();
+            });
+            
+            star.addEventListener('mouseover', function() {
+                const rating = parseInt(this.getAttribute('data-rating'));
+                highlightStars(rating);
+            });
+        });
+
+        function updateStarRating() {
+            document.querySelectorAll('.star-rating').forEach((star, index) => {
+                if (index < selectedRating) {
+                    star.classList.remove('text-gray-300');
+                    star.classList.add('text-yellow-400');
+                } else {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        }
+
+        function highlightStars(rating) {
+            document.querySelectorAll('.star-rating').forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('text-gray-300');
+                    star.classList.add('text-yellow-400');
+                } else {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        }
+
+        // Handle Review Submission
+        function handleReviewSubmit(event) {
+            event.preventDefault();
+            if (selectedRating === 0) {
+                alert('Please select a rating before submitting your review.');
+                return;
+            }
+            
+            const formData = new FormData(event.target);
+            const reviewData = Object.fromEntries(formData.entries());
+            reviewData.rating = selectedRating;
+            reviewData.id = Date.now();
+            reviewData.created_at = new Date().toISOString();
+            
+            salonData.reviews.push(reviewData);
+            
+            alert('Thank you for your review! It will be published after moderation.');
+            event.target.reset();
+            selectedRating = 0;
+            updateStarRating();
+        }
+
+        // Handle Contact Form Submission
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const contactData = Object.fromEntries(formData.entries());
+            
+            // Simulate PHP backend processing
+            contactData.id = Date.now();
+            contactData.created_at = new Date().toISOString();
+            
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            event.target.reset();
+        }
+
+        // Initialize date input with minimum date (today)
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.querySelector('input[name="date"]');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-2xl');
+            } else {
+                navbar.classList.remove('shadow-2xl');
+            }
+        });
+
+        // Simulate PHP session management
+        const sessionManager = {
+            login: function(userData) {
+                localStorage.setItem('salon_user', JSON.stringify(userData));
+            },
+            logout: function() {
+                localStorage.removeItem('salon_user');
+            },
+            getCurrentUser: function() {
+                const user = localStorage.getItem('salon_user');
+                return user ? JSON.parse(user) : null;
+            }
+        };
+
+        // Simulate PHP database operations
+        const dbOperations = {
+            saveAppointment: function(appointmentData) {
+                const appointments = JSON.parse(localStorage.getItem('salon_appointments') || '[]');
+                appointments.push(appointmentData);
+                localStorage.setItem('salon_appointments', JSON.stringify(appointments));
+                return true;
+            },
+            getAppointments: function() {
+                return JSON.parse(localStorage.getItem('salon_appointments') || '[]');
+            },
+            saveReview: function(reviewData) {
+                const reviews = JSON.parse(localStorage.getItem('salon_reviews') || '[]');
+                reviews.push(reviewData);
+                localStorage.setItem('salon_reviews', JSON.stringify(reviews));
+                return true;
+            },
+            getReviews: function() {
+                return JSON.parse(localStorage.getItem('salon_reviews') || '[]');
+            }
+        };
+
+        // Analytics tracking simulation
+        const analytics = {
+            trackPageView: function(page) {
+                console.log(`Page view tracked: ${page}`);
+            },
+            trackEvent: function(action, category, label) {
+                console.log(`Event tracked: ${action} - ${category} - ${label}`);
+            }
+        };
+
+        // Track initial page load
+        analytics.trackPageView('home');
+
+        console.log('Elite Salon & Spa website loaded successfully!');
+        console.log('Features available:');
+        console.log('- Online booking system');
+        console.log('- Service catalog management');
+        console.log('- Staff profiles');
+        console.log('- Image gallery');
+        console.log('- Customer reviews');
+        console.log('- Contact form');
+        console.log('- Mobile responsive design');
+    </script>
+</body>
+</html>
